@@ -1,0 +1,10 @@
+.imgContainer {
+  width: 70vw;
+  margin: 5vh auto 5vh;
+}
+.img {
+  width: 22%;
+  margin-bottom: 2vh;
+  margin: 5px;
+  border: 2px solid black;
+}
