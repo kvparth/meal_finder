@@ -23,11 +23,18 @@ export default function App() {
     setSelect(item);
   };
   const addIngredients=(item)=>{
+    console.log(ingredients);
+    console.log(item);
+    let addedIngredients = []
   if(item!==null){
-    Object.keys(item).map((object,i)=>{
-      if (item[`strIngredient${i}`])
-      setIngredients([...ingredients,`${item[`strIngredient${i}`]} - ${item[`strMeasure${i}`]}`])
+    Object.keys(item).forEach((object,i)=>{
+      if (item[`strIngredient${i}`]){
+         //setIngredients([...ingredients,`${item[`strIngredient${i}`]} - ${item[`strMeasure${i}`]}`])
+         addedIngredients.push(`${item[`strIngredient${i}`]} - ${item[`strMeasure${i}`]}`)
+      }
     })
+    console.log('addedIngredients', addedIngredients)
+    setIngredients(addedIngredients)
   }
 }
   console.log(ingredients);
@@ -53,7 +60,7 @@ export default function App() {
         <p>{select?.strInstructions}</p>
         <h2>Ingredients</h2>
         <ul>
-          {ingredients.map((ing)=><li>${ing}</li>).join('')}
+          {ingredients.map((ing)=><li>{ing}</li>)}
         </ul>
         </div>}
     </div>
