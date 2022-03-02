@@ -3,6 +3,7 @@ const List = (props) => {
   return (
     <div className="imgContainer">
       {props.meals.map((item) => (
+        <div className="meal" >
         <img
           className="img"
           src={item.strMealThumb}
@@ -12,8 +13,12 @@ const List = (props) => {
             props.addIngredients(item);
           
           }}
-          alt="ima"
+          alt={item.strMeal}
         />
+        <div className="meal-info">
+          <h3 className="h4">{item.strMeal}</h3>
+        </div>
+        </div>
       ))}
     </div>
   );
