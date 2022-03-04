@@ -1,12 +1,30 @@
 .App {
 text-align: center;
+color: wheat;
 
 }
 #single-meal{
     width: 450px;
     height: 450px;
-    border: 2px solid black;
+    border: 2px solid #c0aadd;
 }
 form{
     display: inline;
+}
+.result-heading{
+    margin-top: 12px;
+}
+.method{
+    border: 2px dotted white;
+    margin: 30px;
+    padding: 24px;
+}
+#list{
+    background-color: #121318;
+    color: wheat;
+    list-style: none;
+    margin: 11px;
+    width: fit-content;
+    display: inline-block;
+    border: 0.1px solid white;
 }

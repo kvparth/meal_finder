@@ -2,22 +2,31 @@ import axios from "axios";
 import {useState } from "react";
 import List from "./Components/List";
 import "./App.css";
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   const [input, setInput] = useState("");
   const [meals, setMeals] = useState([]);
   const [select, setSelect] = useState(null);
   const [ingredients,setIngredients]=useState([]);
+  const [isClick,setIsClick]=useState(false);
   const handlechange = (event) => {
+
     setInput(event.target.value);
   };
   const searchHandle = async () => {
+    
     if(input){
+      setIsClick(true);
       const response = await axios(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`
       );
       setMeals(response.data.meals);
-    } 
+    }
+    else{
+      alert("Please Enter a Search Keyword");
+    }
   };
   const handleSelect = (item) => {
     setSelect(item);
@@ -51,26 +60,29 @@ export default function App() {
         <form  id="submit">
       <input type="text" value={input} onChange={(e) => handlechange(e)} onSubmit={searchHandle}/>
       </form>
-      <button onClick={searchHandle}>Search</button>
+      <button onClick={searchHandle} className="search-btn">Search</button>
       <button onClick={randomMeal}>Shuffle</button>
       </div>
+      {isClick && <div className="result-heading"><h2>Search result for "{input}"</h2></div>}
       {meals=== null ? (
-        <div><h3>No Result Found TRY AGAIN!</h3></div>
+        <div className="result-heading"><h3>No Result Found TRY AGAIN!</h3></div>
       ) : (
+        <div>
         <List meals={meals} onSelect={handleSelect}
         addIngredients={addIngredients} />
+        </div>
       )}
       {select !== null   && <div>
         <h1>{select?.strMeal}</h1>
         <img id="single-meal" src={select?.strMealThumb} alt="img" />
-        <div>
-          <p>Category:{select?.strCategory}</p>
-          <p>Region:{select?.strArea}</p>
+        <div id="details" className="method">
+          <h4>Category:{"             "+select?.strCategory}</h4>
+          <h4>Region:{"               "+select?.strArea}</h4>
         </div>
-        <p>{select?.strInstructions}</p>
+        <p className="method">{select?.strInstructions}</p>
         <h2>Ingredients</h2>
-        <ul>
-          {ingredients.map((ing)=><li key={Math.random()*20}>{ing}</li>)}
+        <ul id="ing" className="method">
+          {ingredients.map((ing)=><li id="list" key={Math.random()*20}>{ing}</li>)}
         </ul>
         </div>}
     </div>
